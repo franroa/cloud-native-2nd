@@ -6,10 +6,6 @@ cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
 kubectl create namespace confluent
 kubectl config set-context --current --namespace confluent
 
-#TODO Observability
-#echo "--------------------------- Install Observability ---------------------------"
-#./init-observability.sh
-
 echo "--------------------------- Install Docker secrets ---------------------------"
 kubectl create secret generic regcred   --from-file=.dockerconfigjson=$HOME/.docker/config.json    --type=kubernetes.io/dockerconfigjson
 
@@ -24,7 +20,3 @@ kubectl wait --for=condition=ready pod -l app=postgres-persons
 sh run_person_db_command.sh `kubectl get pods --no-headers -o custom-columns=":metadata.name" | grep postgres-person`
 kubectl wait --for=condition=ready pod -l app=postgres-locations
 sh run_location_db_command.sh `kubectl get pods --no-headers -o custom-columns=":metadata.name" | grep postgres-location`
-
-#TODO Port Forward
-#kubectl wait --for=condition=ready pod -l app=jaeger
-#./port-forward.sh
