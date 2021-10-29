@@ -4,6 +4,6 @@ connection and person services are not expected to be so hugh, so we can stay wi
 
 Location Service:
 The location service will get information from the mobiles around, and will be ingesting a hugh amount of data,
-so I would refactor two things here: I would use gRPC for the communication, which is able to process a higher
-amount of data than RESTful can. Also I would decouple the calls inserting the data to the database for preventing
-data congestion when writing data into the database.
+so I would refactor two things here: I would use gRPC for the communication with the location services, a protocol
+able to process a higher amount of data than RESTful can. I would also decouple the calls inserting the data into the
+database for preventing data congestion when writing data into the database by leveraging kafka queues.
